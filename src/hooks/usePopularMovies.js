@@ -1,8 +1,8 @@
 import {useQuery} from "@tanstack/react-query";
 import api from "../utlis/Api.";
 
-const fetchPopularMovies= async ()=>{
-    return await api.get(`/discover/movie`,{
+const fetchPopularMovies= ()=>{
+    return api.get(`/discover/movie`,{
         params: {
             language: 'ko-KR',
             sort_by:'popularity.desc',
