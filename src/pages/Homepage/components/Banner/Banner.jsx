@@ -1,12 +1,11 @@
 import React from 'react';
-import {usePopularMoviesQuery} from "../../../../hooks/usePopularMovies";
+import {useKoreanMoviesQuery} from "../../../../hooks/useKoreanMovies";
 import {Alert} from "react-bootstrap";
 import "./Banner.style.css";
 
 const Banner = () => {
 
-    const {data,isLoading,isError,error} = usePopularMoviesQuery()
-    console.log('ddd',data)
+    const {data,isLoading,isError,error} = useKoreanMoviesQuery()
     const randomIndex = ()=> {
         return Math.floor(Math.random() * 20);
     }

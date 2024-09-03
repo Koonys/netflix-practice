@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import api from "../utlis/Api.";
 
-const fetchPopularMovies= ()=>{
+const fetchKoreanMovies= ()=>{
     return api.get(`/discover/movie`,{
         params: {
             language: 'ko-KR',
@@ -13,10 +13,10 @@ const fetchPopularMovies= ()=>{
         }
     })
 };
-export const usePopularMoviesQuery=()=>{
+export const useKoreanMoviesQuery=()=>{
     return useQuery({
         queryKey:['movie-popular'],
-        queryFn:fetchPopularMovies,
+        queryFn:fetchKoreanMovies,
         select:(result)=>result.data
     });
 };

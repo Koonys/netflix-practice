@@ -1,10 +1,11 @@
 .movie-card{
     width: min(330px, 13.5vw);
     height: auto;
-    aspect-ratio: 3/2;
+    aspect-ratio: 2/3;
     background-size: cover;
     cursor: pointer;
     transition: 0.5s;
+    border-radius: 3%;
 }
 
 .overlay{
@@ -17,6 +18,10 @@
     font-weight: bold;
     overflow-wrap: break-word;
     padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 3%;
 }
 
 .overlay > h1 {
@@ -32,17 +37,17 @@
 }
 
 .overlay:hover{
-    opacity: 1;
+    opacity: 0.8;
 }
 
 .movie-card:hover{
-    transform: scale(1.2) translateZ(20px);
+    transform: scale(1.1) translateZ(20px);
     z-index: 2;
 }
 
 @media (max-width: 900px) {
     .movie-card{
-        width: min(330px, 19vw);
+        width: min(200px, 19vw);
     }
 
     .overlay > h1 {
