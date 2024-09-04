@@ -5,6 +5,7 @@ import {Alert, Col, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
+import './MoviePage.module.css';
 import './MoviePage.style.css';
 import LoadSpinner from "../../common/LoadSpinner/LoadSpinner";
 

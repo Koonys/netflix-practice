@@ -1,12 +1,12 @@
-.movie-card{
-    width: min(200px, 13.5vw);
+.movieCard{
+    width: 100%;
     height: auto;
     aspect-ratio: 2/3;
     background-size: cover;
     cursor: pointer;
     transition: 0.5s;
     border-radius: 3%;
-    margin-top: 1.5vh;
+    margin-top: 3vh;
 }
 
 .overlay{
@@ -41,14 +41,14 @@
     opacity: 0.8;
 }
 
-.movie-card:hover{
+.movieCard:hover{
     transform: scale(1.1) translateZ(20px);
     z-index: 2;
 }
 
-@media (max-width: 900px) {
-    .movie-card{
-        width: min(200px, 19vw);
+@media (max-width: 991px) {
+    .movieCard{
+        width: 100%;
     }
 
     .overlay > h1 {
@@ -61,27 +61,5 @@
 
     .overlay > div{
         font-size: calc(1.2vw);;
-    }
-}
-
-@media (max-width: 700px) {
-    .movie-card{
-        width: min(330px, 32vw);
-    }
-
-    .overlay{
-        padding: 2vw;
-    }
-
-    .overlay > h1 {
-        font-size: calc(5vw);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-bottom: 4px;
-    }
-
-    .overlay > div{
-        font-size: calc(2vw);;
     }
 }

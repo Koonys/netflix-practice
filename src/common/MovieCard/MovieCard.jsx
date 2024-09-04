@@ -1,9 +1,14 @@
 import React from 'react';
 import {Badge} from "react-bootstrap";
-import './MovieCard.style.css'
+import HomepageStyle from './MovieCard.module.css';
+import MoviePageStyle from '../../pages/Movies/MoviePage.module.css';
 import {useMovieGenreQuery} from "../../hooks/useMovieGenre";
 
-const MovieCard = ({movie}) => {
+const MovieCard = ({movie, pageType}) => {
+
+    console.log('pageType',pageType)
+
+    const styles = pageType === 'homePage' ? HomepageStyle : MoviePageStyle;
 
     const {data:genreData} = useMovieGenreQuery();
 
@@ -21,9 +26,9 @@ const MovieCard = ({movie}) => {
             style={{
                 backgroundImage:`url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
             }}
-            className={'movie-card'}
+            className={styles.movieCard}
         >
-            <div className={'overlay'}>
+            <div className={styles.overlay}>
                 <h1>{movie.title}</h1>
                 <div>
                     {transGenre(movie.genre_ids).map((id,index) => <Badge bg={'danger'} key={index} className={'me-1'}>{id}</Badge>)}

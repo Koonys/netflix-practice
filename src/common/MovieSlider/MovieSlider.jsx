@@ -31,7 +31,7 @@ const MovieSlider = ({title,movies}) => {
                 containerClass={'carousel-container'}
                 responsive={response}
             >
-                {movies.map((movie, index) => <MovieCard movie={movie} key={index}/>)}
+                {movies.map((movie, index) => <MovieCard movie={movie} key={index} pageType={'homePage'}/>)}
             </Carousel>
         </div>
     );
