@@ -21,8 +21,8 @@ function App() {
            <Route index element={<MoviePage/>}/>
            <Route path={':id'} element={<MovieDetailPage/>}/>
         </Route>
-        {/*<Route path={'/movies'} element={<MoviePage/>}/>*/}
-        {/*<Route path={'/movies/:id'} element={<MovieDetailPage/>}/>*/}
+        <Route path={'/movies'} element={<MoviePage/>}/>
+        <Route path={'/movies/:id'} element={<MovieDetailPage/>}/>
       </Route>
       <Route path={'*'} element={<NotFoundPage/>}/>
     </Routes>
