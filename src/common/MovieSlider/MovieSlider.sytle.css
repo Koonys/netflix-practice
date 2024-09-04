@@ -6,12 +6,12 @@
 
 .carousel-container{
     overflow: hidden;
-    height: min(600px, 22.5vw);
+    height: min(600px, 23vw);
 }
 
 @media (max-width: 900px) {
     .carousel-container{
-        height: min(400px, 32vw);
+        height: min(400px, 33.5vw);
     }
 
     .slide-title{
@@ -23,7 +23,7 @@
 
 @media (max-width: 700px) {
     .carousel-container{
-        height: min(330px, 53vw);
+        height: min(330px, 55vw);
     }
 
     .slide-title{

@@ -1,11 +1,12 @@
 .movie-card{
-    width: min(330px, 13.5vw);
+    width: min(200px, 13.5vw);
     height: auto;
     aspect-ratio: 2/3;
     background-size: cover;
     cursor: pointer;
     transition: 0.5s;
     border-radius: 3%;
+    margin-top: 1.5vh;
 }
 
 .overlay{

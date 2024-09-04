@@ -11,7 +11,7 @@ const TopRatedMovieSlide = () => {
     const {data, isLoading, isError, error} = useTopRatedMoviesQuery();
     console.log('dddd',data)
     if(isLoading){
-        return <h1>Loading</h1>
+        return
     }
 
     if(isError){

@@ -1,14 +1,15 @@
 import React from 'react';
-import {useKoreanMoviesQuery} from "../../../../hooks/useKoreanMovies";
 import {Alert} from "react-bootstrap";
 import 'react-multi-carousel/lib/styles.css';
 import MovieSlider from "../../../../common/MovieSlider/MovieSlider";
+import {useNowPlayingMoviesQuery} from "../../../../hooks/useNowPlayingMovies";
 
-const KoreanMovieSlide = () => {
+const NowPlayingMovieSlide = () => {
 
 
 
-    const {data, isLoading, isError, error} = useKoreanMoviesQuery()
+    const {data, isLoading, isError, error} = useNowPlayingMoviesQuery();
+    console.log('now',data)
     if(isLoading){
         return
     }
@@ -19,9 +20,9 @@ const KoreanMovieSlide = () => {
 
     return (
         <div>
-            <MovieSlider title={'한국영화'} movies={data.results}/>
+            <MovieSlider title={'현재 상영중인 영화'} movies={data.results}/>
         </div>
     );
 };
 
-export default KoreanMovieSlide;
+export default NowPlayingMovieSlide;

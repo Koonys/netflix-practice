@@ -2,6 +2,7 @@ import React from 'react';
 import {useKoreanMoviesQuery} from "../../../../hooks/useKoreanMovies";
 import {Alert} from "react-bootstrap";
 import "./Banner.style.css";
+import LoadSpinner from "../../../../common/LoadSpinner/LoadSpinner";
 
 const Banner = () => {
 
@@ -14,10 +15,10 @@ const Banner = () => {
 
 
     if(isLoading){
-        <h1>Loading....</h1>
+        return <LoadSpinner/>
     }
     if(isError){
-        <Alert variant={'danger'}>{error.massage}</Alert>
+        return <Alert variant={'danger'}>{error.message}</Alert>
     }
 
     return (
