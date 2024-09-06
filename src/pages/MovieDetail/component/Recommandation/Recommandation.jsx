@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Row} from "react-bootstrap";
 import {useRecommand} from "../../../../hooks/useRecommand";
+import MovieCard from "../../../../common/MovieCard/MovieCard";
 
 const Recommend = (movie) => {
 
@@ -12,18 +13,11 @@ const Recommend = (movie) => {
         <>
             {!isLoading?data?.results.length>=0
                 ?showMovie()?.map((item, index)=>(
-                <Col key={index} xs={6} style={{
-                    marginTop: '0.5rem'
+                <Col key={index} xs={4} style={{
+                    marginTop: '0.5rem',
+                    marginBottom: '1.5rem'
                 }}>
-                    <div className={'d-flex justify-content-end align-items-end'}
-                    style={{
-                        backgroundImage:`url(https://image.tmdb.org/t/p/w500${item.poster_path})`,
-                        backgroundSize:'cover',
-                        borderRadius: '10px',
-                        aspectRatio: '2/3',
-                        marginBottom: '1rem',
-                    }}>
-                    </div>
+                    <MovieCard movie={item} pageType={'homePage'}></MovieCard>
                 </Col>
             ))
             : <div className={'d-flex justify-content-center'}>
