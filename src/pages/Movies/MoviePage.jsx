@@ -40,6 +40,12 @@ const MoviePage = () => {
         setSelectedID(null)
     },[keyword])
 
+    useEffect(() => {
+        setTitle('인기도(내림차순)')
+        setGenreTitle('전체')
+        setSelectedID(null)
+    }, [page]);
+
     const handlePageClick=({selected})=>{
         setPage(selected+1)
     }
