@@ -20,6 +20,12 @@ const MovieReview = (movie) => {
             setCountReview(data?.results.length);
         }
         setBtnState(!btnState)
+        if(btnState){
+            window.scrollTo({
+                top:0,
+                behavior: 'smooth'
+            })
+        }
     }
     return (
         <Col style={{

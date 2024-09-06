@@ -11,6 +11,10 @@ const MovieCard = ({movie, pageType}) => {
     const nav = useNavigate();
     const movieDetail = (id)=> {
         nav(`/movies/${id}`)
+        window.scrollTo({
+            top:0,
+            behavior:'smooth'
+        })
     }
 
     const {data:genreData} = useMovieGenreQuery();
