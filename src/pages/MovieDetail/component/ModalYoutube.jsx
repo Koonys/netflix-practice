@@ -4,11 +4,13 @@ import {Modal} from "react-bootstrap";
 import YouTube from "react-youtube";
 import {useVideoKey} from "../../../hooks/useVideoKey";
 import {useVideoKeyUS} from "../../../hooks/useVideoKeyUS";
+import './ModalYoutube.style.css'
 
-const ModalYoutube = (props) => {
+const ModalYoutube = ({movieId,...props}) => {
 
-    const {data} = useVideoKey(props.movieId);
-    const {data:usData } = useVideoKeyUS(props.movieId)
+    const {data} = useVideoKey(movieId);
+    const {data:usData } = useVideoKeyUS(movieId)
+
 
     return (
             <Modal
@@ -19,9 +21,12 @@ const ModalYoutube = (props) => {
             >
                 <Modal.Header closeButton/>
                 <Modal.Body className={'d-flex justify-content-center'}>
-                    {data?.key?<YouTube
-                        videoId={data?.key}
-                    />:<YouTube videoId={usData?.key}/>}
+                    <div className={'youtube-video-container'}>
+                        {data?.key ?
+                            <YouTube videoId={data?.key}/> :
+                            <YouTube videoId={usData?.key}/>
+                        }
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant={'danger'} onClick={props.onHide}>Close</Button>

@@ -11,8 +11,8 @@ const MovieReview = (movie) => {
 
     const [countReview, setCountReview] = useState(3);
     const [btnState, setBtnState] = useState(false);
-
     const {data,isLoading,isError} = useMovieReview(movie.id);
+
     const handleShowReview=()=>{
         if(btnState){
             setCountReview(3);
@@ -26,9 +26,11 @@ const MovieReview = (movie) => {
             position: 'relative',
             marginBottom: '1rem'
         }}>
-            {isError
-            ? <div>
-                    Review를 불러오는데 실패했습니다.
+            {isError||data?.results.length===0
+            ? <div className={'d-flex justify-content-center'}>
+                    <h2 style={{
+                        marginTop: '1rem'
+                    }}>리뷰 정보가 없습니다.</h2>
                 </div>
             : !isLoading
                 ? data?.results.slice(0,countReview).map((item,index)=>(

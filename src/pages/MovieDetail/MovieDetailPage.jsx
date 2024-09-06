@@ -7,7 +7,7 @@ import LoadSpinner from "../../common/LoadSpinner/LoadSpinner";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlay, faStar, faStarHalf} from "@fortawesome/free-solid-svg-icons";
+import {faPlay, faStar, faStarHalf, faXmark} from "@fortawesome/free-solid-svg-icons";
 import './MovieDetailPage.style.css'
 import MovieReview from "./component/MovieReview/MovieReview";
 import Recommend from "./component/Recommandation/Recommandation";
@@ -23,12 +23,6 @@ const MovieDetailPage = () => {
     const {data, isLoading, isError} = useMovieDetail(id);
     const companyLogo = data?.production_companies.find(company => company.logo_path)
 
-    console.log('detail',data)
-
-    const koreanCheck =()=>{
-        return data?.original_language === "ko";
-
-    }
     const convertMoney=(number)=>{
         return parseInt(number).toLocaleString();
     }
@@ -150,13 +144,16 @@ const MovieDetailPage = () => {
                                 borderBottom: 'solid 1px white',
                                 paddingBottom: '1rem'
                             }}><Col>
-                                    평점: {convertVote(data?.vote_average).map((star, index) => (
+                                    평점: {data?.vote_average!==0?convertVote(data?.vote_average).map((star, index) => (
                                     <span style={{
                                         width: '20px',
                                         padding: '0px'
                                     }} key={index}>{star}</span>
-                                ))}
-                                </Col>
+                                )): <span style={{
+                                width: '20px',
+                                padding: '0px'
+                            }}><FontAwesomeIcon icon={faXmark} /></span>}
+                            </Col>
                                 <Col>평점수: {convertMoney(data?.vote_count)}개</Col>
                             </Row>
                         </div>
@@ -187,7 +184,7 @@ const MovieDetailPage = () => {
                     </Col>
                 </Row>
             </Container>
-            <ModalYoutube show={modalShow} onHide={()=>setModalShow(false)} movieId={id} korean={koreanCheck()} />
+            <ModalYoutube show={modalShow} onHide={()=>setModalShow(false)} movieId={id} />
         </div>
     );
 };

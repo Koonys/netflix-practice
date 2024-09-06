@@ -63,12 +63,10 @@ const MoviePage = () => {
     const handleGenre = (id, event)=> {
         let selectedGenre = null;
         if(!isSmallScreen){
-            console.log('버튼')
             selectedGenre = id.target.value;
             const name = id.target.getAttribute('data-name')
             setGenreTitle(name)
         }else{
-            console.log('드롭다운')
             selectedGenre = id;
             const name = event.target.getAttribute('data-name')
             setGenreTitle(name)
@@ -77,14 +75,12 @@ const MoviePage = () => {
         setSelectedID(parseInt(selectedGenre))
 
         if(selectedGenre === '0'){
-            console.log('전체')
             setModData(data?.results)
             return;
         }
 
         if(!selectedGenre) return;
         const filtered = data?.results.filter(movie=>movie.genre_ids.includes(parseInt(selectedGenre)))
-        console.log('filter',filtered)
         setModData(filtered)
     }
 
