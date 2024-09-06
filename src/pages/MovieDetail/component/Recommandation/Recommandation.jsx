@@ -9,9 +9,10 @@ const Recommend = (movie) => {
     const showMovie =()=>{
         return data?.results.slice(0, 6)
     }
+    console.log('data',showMovie())
     return (
         <>
-            {!isLoading?data?.results.length>=0
+            {!isLoading?showMovie()===0
                 ?showMovie()?.map((item, index)=>(
                 <Col key={index} xs={4} style={{
                     marginTop: '0.5rem',
