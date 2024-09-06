@@ -44,11 +44,11 @@
         width: 80%;
     }
     .banner-text-area h1{
-        font-size: 1.5rem;
+        font-size: 3vw;
     }
 
     .banner-text-area p{
-        font-size: 0.8rem;
+        font-size: 2vw;
         overflow: hidden; /* 컨테이너를 넘치는 텍스트를 숨김 */
         text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 추가 */
     }

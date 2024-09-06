@@ -26,7 +26,7 @@
 }
 
 .overlay > h1 {
-    font-size: calc(1.5vw);
+    font-size: 250%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -34,7 +34,7 @@
 }
 
 .overlay > div{
-    font-size: calc(0.8vw);;
+    font-size: 100%;
 }
 
 .overlay:hover{
@@ -52,7 +52,7 @@
     }
 
     .overlay > h1 {
-        font-size: calc(2.5vw);
+        font-size: calc(3vw);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -60,6 +60,6 @@
     }
 
     .overlay > div{
-        font-size: calc(1.2vw);;
+        font-size: calc(1.4vw);;
     }
 }

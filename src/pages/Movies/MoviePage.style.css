@@ -9,7 +9,8 @@
     padding: 8px 12px;
     text-decoration: none;
     color: white;
-    background-color: gray;
+    font-weight: bolder;
+    background-color: black;
     border-radius: 5%;
     transition: background-color 0.3s ease;
     border-color: black;
@@ -21,24 +22,26 @@
 }
 
 .active .page-link {
-    background-color: darkgray;
-    border-color: darkgray;
-    color: darkred;
+    background-color: darkred;
+    border-color: black;
+    color: black;
 }
 
 .page-item.disabled .page-link {
     color: dimgray;
     background-color: black;
+    border-color: black;
     cursor: not-allowed;
 }
 
 .result-empty{
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 10vh;
     font-size: 2vw;
     flex-direction: column;
     align-items: center;
+    height: 40vw;
 }
 
 .result-empty > *{
@@ -47,4 +50,8 @@
 
 .result-empty li {
     font-size: 1.5vw;
+}
+
+#dropdown-button-drop-down-centered{
+    width: 160px;
 }

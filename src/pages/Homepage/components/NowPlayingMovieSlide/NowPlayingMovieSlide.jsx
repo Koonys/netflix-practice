@@ -9,7 +9,7 @@ const NowPlayingMovieSlide = () => {
 
 
     const {data, isLoading, isError, error} = useNowPlayingMoviesQuery();
-    console.log('now',data)
+
     if(isLoading){
         return
     }

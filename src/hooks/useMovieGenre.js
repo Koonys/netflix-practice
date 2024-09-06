@@ -7,7 +7,7 @@ const fetchMovieGenre=()=>{
 
 export const useMovieGenreQuery=()=>{
     return useQuery({
-        queryKey:['move-genre'],
+        queryKey:['movie-genre'],
         queryFn:fetchMovieGenre,
         select:(re)=>re.data.genres,
         staleTime: 300000, //5븐

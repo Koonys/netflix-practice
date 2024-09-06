@@ -3,12 +3,15 @@ import {Badge} from "react-bootstrap";
 import HomepageStyle from './MovieCard.module.css';
 import MoviePageStyle from '../../pages/Movies/MoviePage.module.css';
 import {useMovieGenreQuery} from "../../hooks/useMovieGenre";
+import {useNavigate} from "react-router-dom";
 
 const MovieCard = ({movie, pageType}) => {
 
-    console.log('pageType',pageType)
-
     const styles = pageType === 'homePage' ? HomepageStyle : MoviePageStyle;
+    const nav = useNavigate();
+    const movieDetail = (id)=> {
+        nav(`/movies/${id}`)
+    }
 
     const {data:genreData} = useMovieGenreQuery();
 
@@ -27,6 +30,7 @@ const MovieCard = ({movie, pageType}) => {
                 backgroundImage:`url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
             }}
             className={styles.movieCard}
+            onClick={()=>movieDetail(movie.id)}
         >
             <div className={styles.overlay}>
                 <h1>{movie.title}</h1>
