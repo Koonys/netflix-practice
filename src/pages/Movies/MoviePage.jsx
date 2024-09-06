@@ -35,6 +35,9 @@ const MoviePage = () => {
 
     useEffect(()=>{
         setPage(1)
+        setTitle('인기도(내림차순)')
+        setGenreTitle('전체')
+        setSelectedID(null)
     },[keyword])
 
     const handlePageClick=({selected})=>{
