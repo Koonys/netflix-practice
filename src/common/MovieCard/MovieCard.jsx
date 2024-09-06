@@ -1,13 +1,18 @@
 import React from 'react';
 import {Badge} from "react-bootstrap";
 import HomepageStyle from './MovieCard.module.css';
-import MoviePageStyle from '../../pages/Movies/MoviePage.module.css';
+import MoviePageStyle from './MoviePage.module.css';
+import DetailStyle from './DetailPage.module.css';
 import {useMovieGenreQuery} from "../../hooks/useMovieGenre";
 import {useNavigate} from "react-router-dom";
 
 const MovieCard = ({movie, pageType}) => {
 
-    const styles = pageType === 'homePage' ? HomepageStyle : MoviePageStyle;
+    const setUpStyle=(type)=>{
+        if(type === 'homePage'){return HomepageStyle}else if(type === 'detail'){return DetailStyle}else{return MoviePageStyle}
+    }
+    const styles = setUpStyle(pageType);
+
     const nav = useNavigate();
     const movieDetail = (id)=> {
         nav(`/movies/${id}`)

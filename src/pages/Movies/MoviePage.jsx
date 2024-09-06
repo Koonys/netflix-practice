@@ -5,7 +5,7 @@ import {Alert, ButtonGroup, Col, Dropdown, DropdownButton, DropdownItem, Row} fr
 import Container from "react-bootstrap/Container";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
-import './MoviePage.module.css';
+import '../../common/MovieCard/MoviePage.module.css';
 import './MoviePage.style.css';
 import LoadSpinner from "../../common/LoadSpinner/LoadSpinner";
 import {useMovieGenreQuery} from "../../hooks/useMovieGenre";

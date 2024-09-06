@@ -17,7 +17,7 @@ const Recommend = (movie) => {
                     marginTop: '0.5rem',
                     marginBottom: '1.5rem'
                 }}>
-                    <MovieCard movie={item} pageType={'homePage'}></MovieCard>
+                    <MovieCard movie={item} pageType={'detail'}></MovieCard>
                 </Col>
             ))
             : <div className={'d-flex justify-content-center'}>

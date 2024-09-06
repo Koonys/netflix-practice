@@ -9,6 +9,7 @@
 
 .main-div h1{
     font-size: 5vw;
+    margin-top: 1rem;
 }
 
 .main-div p{
@@ -20,8 +21,9 @@
 }
 
 .img-filed{
-    width: 30%;
+    width: 40vw;
     background-position: top;
     background-size: cover;
     aspect-ratio: 2/3;
+    margin-top: 1rem;
 }

@@ -111,7 +111,7 @@ const AppLayout = () => {
                 }}
             >
                 <h2 style={{
-                    paddingLeft: '100px'
+                    paddingLeft: '4rem'
                 }}>Copy Right @ 2024 HSH</h2>
             </div>
         </div>

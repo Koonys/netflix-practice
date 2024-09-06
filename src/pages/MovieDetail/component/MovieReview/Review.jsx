@@ -6,7 +6,7 @@ import {Col, Row} from "react-bootstrap";
 const Review = ({item}) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
-    const limit = 680;
+    const limit = 400;
     const toggleExpand = ()=> {
         setIsExpanded(!isExpanded)
     }
