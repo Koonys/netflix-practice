@@ -1,0 +1,25 @@
+.over-view{
+    margin-top: 1vw;
+    font-size: 1rem;
+}
+
+.genre-badge{
+    margin-right: 1rem;
+    font-size: 1rem;
+}
+
+.play-btn{
+    font-size: 1rem;
+}
+
+.movie-info-div .row{
+    margin-top: 1rem !important;
+}
+
+.movie-info-div .row .col{
+    font-size: 1.1rem !important;
+}
+
+.movie-info-p{
+    margin-bottom: 8px !important;
+}
