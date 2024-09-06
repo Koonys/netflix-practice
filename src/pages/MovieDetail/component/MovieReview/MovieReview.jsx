@@ -12,8 +12,7 @@ const MovieReview = (movie) => {
     const [countReview, setCountReview] = useState(3);
     const [btnState, setBtnState] = useState(false);
 
-    const {data,isError} = useMovieReview(movie.id);
-    console.log('review',data?.results)
+    const {data,isLoading,isError} = useMovieReview(movie.id);
     const handleShowReview=()=>{
         if(btnState){
             setCountReview(3);
@@ -31,10 +30,12 @@ const MovieReview = (movie) => {
             ? <div>
                     Review를 불러오는데 실패했습니다.
                 </div>
-            : data?.results.slice(0,countReview).map((item,index)=>(
+            : !isLoading
+                ? data?.results.slice(0,countReview).map((item,index)=>(
                   <Review item={item} key={index}/>
-            ))}
-            {data?.results.length <= 3?"":
+            )):""}
+            {!isLoading?
+                data?.results.length <= 3?"":
             <Button onClick={handleShowReview} style={{
                 position: 'absolute',
                 bottom:'-10px',
@@ -43,7 +44,7 @@ const MovieReview = (movie) => {
                 borderRadius: '100%'
             }} variant={'danger'}>
                 {btnState?<FontAwesomeIcon icon={faCaretUp} />:<FontAwesomeIcon icon={faCaretDown} />}
-            </Button>
+            </Button>:""
             }
         </Col>
     );

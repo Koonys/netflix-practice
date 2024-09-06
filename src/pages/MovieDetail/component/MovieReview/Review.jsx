@@ -4,8 +4,6 @@ import './Review.style.css'
 
 const Review = ({item}) => {
 
-    console.log('reiview Item',item)
-
     const [isExpanded, setIsExpanded] = useState(false);
     const limit = 680;
     const toggleExpand = ()=> {
