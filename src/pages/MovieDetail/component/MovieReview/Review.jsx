@@ -14,8 +14,9 @@ const Review = ({item}) => {
     const removeTags = (string)=> {
         return string.replace(/<\/?[^>]+(>|$)/g, " ");
     }
-
+    const content = removeTags(item.content);
     const wrightDate = item.created_at.split('T')[0];
+
 
     return (
         <div style={{
@@ -32,9 +33,12 @@ const Review = ({item}) => {
             </Col>
         </Row>
             <div style={{fontSize: '0.9rem'}}>
-                <span>{isExpanded ? removeTags(item.content) : removeTags(item.content).slice(0, limit) + '....'}</span>
+                <span>{isExpanded ? content
+                        : content.length > limit
+                            ? `${content.slice(0, limit)}.....`
+                            : content}</span>
             </div>
-            {item.content.length > limit && (
+            {content.length > limit && (
                 <Button size={"sm"} variant={'danger'} style={{
                     marginTop: '0.5rem',
                     backgroundColor: 'black',
