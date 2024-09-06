@@ -111,7 +111,9 @@ const MovieDetailPage = () => {
                                         }}
                                         alt={companyLogo.name}
                                     />
-                                 ) : ('')
+                                ) : <span style={{
+                                    marginLeft: '1rem'
+                                }}>정보없음</span>
                                 }
                             </Col>
                         </Row>
