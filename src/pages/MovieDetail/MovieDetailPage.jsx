@@ -75,7 +75,7 @@ const MovieDetailPage = () => {
                                     fontSize: '2.5rem'
                                 }}>{data?.title}</h1>
                             </Col>
-                            <Col xs={6} className={'d-flex justify-content-end align-items-center'}>
+                            <Col xs={6} className={'d-flex justify-content-end align-items-start'}>
                                 <Button
                                     className={'play-btn'}
                                     variant={'danger'}
