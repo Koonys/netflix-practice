@@ -1,19 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Row} from "react-bootstrap";
 import {useRecommand} from "../../../../hooks/useRecommand";
 import MovieCard from "../../../../common/MovieCard/MovieCard";
 
 const Recommend = (movie) => {
 
+    const [sliceData, setSliceData] = useState([]);
     const {data, isLoading} = useRecommand(movie.id);
-    const showMovie =()=>{
-        return data?.results.slice(0, 6)
-    }
-    console.log('data',showMovie())
+
+    useEffect(()=>{
+        if(data?.results){
+            setSliceData(data.results.slice(0,6))
+        }
+    },[data])
     return (
         <>
-            {!isLoading?showMovie()===0
-                ?showMovie()?.map((item, index)=>(
+            {!isLoading?sliceData.length !== 0
+                ?sliceData.map((item, index)=>(
                 <Col key={index} xs={4} style={{
                     marginTop: '0.5rem',
                     marginBottom: '1.5rem'
