@@ -33,6 +33,10 @@ const MoviePage = () => {
         }
     }, [data])
 
+    useEffect(()=>{
+        setPage(1)
+    },[keyword])
+
     const handlePageClick=({selected})=>{
         setPage(selected+1)
     }
