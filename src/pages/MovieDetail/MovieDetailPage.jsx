@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from "react-bootstrap/Container";
 import {Badge, Col, Row} from "react-bootstrap";
 import {useParams} from "react-router-dom";
@@ -51,6 +51,10 @@ const MovieDetailPage = () => {
     const clickRecommend=()=>{
         setUserSelect(false)
     }
+
+    useEffect(()=>{
+        setUserSelect(true)
+    },[id])
 
     if(isLoading){
         return <LoadSpinner/>
