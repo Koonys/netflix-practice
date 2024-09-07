@@ -12,13 +12,12 @@ import {useMovieGenreQuery} from "../../hooks/useMovieGenre";
 import Button from "react-bootstrap/Button";
 
 const MoviePage = () => {
-
     const sortType = {
         popDesc: '인기도(내림차순)',
         popAsc: '인기도(올림차순)',
         voteDesc: '평점(내림차순)',
         voteASC: '평점(올림차순)'
-    }
+    };
 
     const [query, setQuery] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -27,127 +26,111 @@ const MoviePage = () => {
     const [genreTitle, setGenreTitle] = useState('전체');
     const [modData, setModData] = useState([]);
     const [selectedID, setSelectedID] = useState(0);
+    const [sortKey, setSortKey] = useState('popDesc');
+    const keyword = query.get('q');
 
-    const keyword = query.get('q')
+    const {data, isLoading, isError, error} = useSearchMovieQuery({keyword, page});
+    const {data: genreData} = useMovieGenreQuery();
 
-    const {data, isLoading,isError,error} = useSearchMovieQuery({keyword, page});
-    const {data:genreData} = useMovieGenreQuery();
-
-    useEffect(()=>{
-        if(data?.results){
-            setModData(data.results);
+    useEffect(() => {
+        if (data?.results) {
+            applySortAndGenre(data.results);
         }
-    }, [data])
+    }, [data, sortKey, selectedID]);
 
-    useEffect(()=>{
-        setPage(1)
-        setTitle(sortType.popDesc)
-        setGenreTitle('전체')
-        setSelectedID(0)
-    },[keyword])
+    useEffect(() => {
+        setPage(1);
+        setTitle(sortType.popDesc);
+        setGenreTitle('전체');
+        setSelectedID(0);
+    }, [keyword]);
 
-    const handlePageClick=({selected})=>{
-        setPage(selected+1)
-    }
+    const applySortAndGenre = (movies) => {
+        let filteredMovies = movies;
+        if (selectedID !== 0) {
+            filteredMovies = movies.filter((movie) => movie.genre_ids.includes(selectedID));
+        }
+
+        switch (sortKey) {
+            case 'popDesc':
+                setModData([...filteredMovies].sort((a, b) => b.popularity - a.popularity));
+                break;
+            case 'popAsc':
+                setModData([...filteredMovies].sort((a, b) => a.popularity - b.popularity));
+                break;
+            case 'voteDesc':
+                setModData([...filteredMovies].sort((a, b) => b.vote_average - a.vote_average));
+                break;
+            case 'voteASC':
+                setModData([...filteredMovies].sort((a, b) => a.vote_average - b.vote_average));
+                break;
+            default:
+                setModData(filteredMovies);
+        }
+    };
+
+    const handlePageClick = ({selected}) => {
+        setPage(selected + 1);
+    };
 
     const handleSelect = (e) => {
-        if(selectedID!==0){
-            switch (e) {
-                case 'popDesc':
-                    setTitle(sortType.popDesc);
-                    modData.sort((a, b) => b.popularity - a.popularity);
-                    break;
-                case 'popAsc':
-                    setTitle(sortType.popAsc);
-                    modData.sort((a, b) => a.popularity - b.popularity);
-                    break;
-                case 'voteDesc':
-                    setTitle(sortType.voteDesc);
-                    modData.sort((a, b) => b.vote_average - a.vote_average);
-                    break;
-                case 'voteASC':
-                    setTitle(sortType.voteASC);
-                    modData.sort((a, b) => a.vote_average - b.vote_average);
-                    break;
-                default:
-                    setTitle('정렬')
-            }
-        }else {
-            switch (e) {
-                case 'popDesc':
-                    setTitle(sortType.popDesc);
-                    setModData([...data?.results].sort((a, b) => b.popularity - a.popularity));
-                    break;
-                case 'popAsc':
-                    setTitle(sortType.popAsc);
-                    setModData([...data?.results].sort((a, b) => a.popularity - b.popularity));
-                    break;
-                case 'voteDesc':
-                    setTitle(sortType.voteDesc);
-                    setModData([...data?.results].sort((a, b) => b.vote_average - a.vote_average));
-                    break;
-                case 'voteASC':
-                    setTitle(sortType.voteASC);
-                    setModData([...data?.results].sort((a, b) => a.vote_average - b.vote_average));
-                    break;
-                default:
-                    setTitle('정렬')
-            }
-        }
-    }
+        setSortKey(e);
+        setTitle(sortType[e]);
+        applySortAndGenre(data?.results);
+    };
 
-    const handleGenre = (id, event)=> {
+    const handleGenre = (id, event) => {
         let selectedGenre = null;
-        if(!isSmallScreen){
+        if (!isSmallScreen) {
             selectedGenre = id.target.value;
-            const name = id.target.getAttribute('data-name')
-            setGenreTitle(name)
-        }else{
+            const name = id.target.getAttribute('data-name');
+            setGenreTitle(name);
+        } else {
             selectedGenre = id;
-            const name = event.target.getAttribute('data-name')
-            setGenreTitle(name)
+            const name = event.target.getAttribute('data-name');
+            setGenreTitle(name);
         }
 
-        setSelectedID(parseInt(selectedGenre))
+        setSelectedID(parseInt(selectedGenre));
 
-        if(selectedGenre === '0'){
-            setModData(data?.results)
+        if (selectedGenre === '0') {
+            setModData(data?.results);
             return;
         }
 
-        if(!selectedGenre) return;
-        const filtered = data?.results.filter(movie=>movie.genre_ids.includes(parseInt(selectedGenre)))
-        setModData(filtered)
-    }
+        if (!selectedGenre) return;
+        const filtered = data?.results.filter((movie) => movie.genre_ids.includes(parseInt(selectedGenre)));
+        setModData(filtered);
+    };
 
-    useEffect(()=>{
+    useEffect(() => {
         const handleResize = () => {
             setIsSmallScreen(window.innerWidth <= 991);
         };
-        window.addEventListener('resize',handleResize);
-        return()=>{
+        window.addEventListener('resize', handleResize);
+        return () => {
             window.removeEventListener('resize', handleResize);
         };
-    },[])
+    }, []);
 
-    if(isLoading){
-        return <LoadSpinner/>
+    if (isLoading) {
+        return <LoadSpinner />;
     }
-    if(isError){
-        return <Alert variant={'danger'}>{error.message}</Alert>
+    if (isError) {
+        return <Alert variant={'danger'}>{error.message}</Alert>;
     }
 
-    if(data.results.length===0){
+    if (data.results.length === 0) {
         return (
-        <div className={'result-empty'}>
-            <p>입력하신 검색어 '{keyword}'와 일치하는 결과가 없습니다.</p>
-            <ul>
-                <li>다른 키워드를 입력해보세요.</li>
-                <li>영화 제목으로 검색해보세요.</li>
-                <li>코미디, 로맨스와 같은 장르명으로 검색해보세요.</li>
-            </ul>
-        </div>
-        )
+            <div className={'result-empty'}>
+                <p>입력하신 검색어 '{keyword}'와 일치하는 결과가 없습니다.</p>
+                <ul>
+                    <li>다른 키워드를 입력해보세요.</li>
+                    <li>영화 제목으로 검색해보세요.</li>
+                    <li>코미디, 로맨스와 같은 장르명으로 검색해보세요.</li>
+                </ul>
+            </div>
+        );
     }
 
     return (
@@ -157,22 +140,22 @@ const MoviePage = () => {
                     {isSmallScreen ? (
                         <DropdownButton title={genreTitle} variant={'danger'} onSelect={handleGenre}>
                             <DropdownItem eventKey={0} data-name={'전체'}>전체</DropdownItem>
-                            {genreData?.map(({name,id},index)=><Dropdown.Item key={index} eventKey={id} data-name={name} >{name}</Dropdown.Item>)}
+                            {genreData?.map(({name, id}, index) => <Dropdown.Item key={index} eventKey={id} data-name={name}>{name}</Dropdown.Item>)}
                         </DropdownButton>
                     ) : (
                         <>
-                        <Button className={'m-1'} variant={selectedID === 0 ? 'light':'danger'} value={0} data-name={'전체'} onClick={handleGenre}>전체</Button>
-                        {genreData?.map(({name, id},index)=>
-                            <Button
-                                className={'m-1'}
-                                variant={selectedID === id ? 'light':'danger'}
-                                key={index}
-                                value={id}
-                                data-name={name}
-                                onClick={handleGenre}
-                            >
-                                {name}
-                            </Button>)}
+                            <Button className={'m-1'} variant={selectedID === 0 ? 'light' : 'danger'} value={0} data-name={'전체'} onClick={handleGenre}>전체</Button>
+                            {genreData?.map(({name, id}, index) =>
+                                <Button
+                                    className={'m-1'}
+                                    variant={selectedID === id ? 'light' : 'danger'}
+                                    key={index}
+                                    value={id}
+                                    data-name={name}
+                                    onClick={handleGenre}
+                                >
+                                    {name}
+                                </Button>)}
                         </>
                     )}
                 </Col>
@@ -198,12 +181,12 @@ const MoviePage = () => {
             <Row>
                 <Col lg={12}>
                     <Row>
-                        {modData?.length!==0
-                        ? modData?.map((movie, index) =>
+                        {modData?.length !== 0
+                            ? modData?.map((movie, index) =>
                                 (<Col key={index} lg={3} xs={4}>
                                     <MovieCard movie={movie}/>
                                 </Col>))
-                        : <Col className={'d-flex justify-content-center mt-4'}>
+                            : <Col className={'d-flex justify-content-center mt-4'}>
                                 <div style={{
                                     height: '500px',
                                     display: "flex",
