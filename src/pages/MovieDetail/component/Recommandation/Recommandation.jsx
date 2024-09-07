@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Col, Row} from "react-bootstrap";
+import {Col} from "react-bootstrap";
 import {useRecommand} from "../../../../hooks/useRecommand";
 import MovieCard from "../../../../common/MovieCard/MovieCard";
 

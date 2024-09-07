@@ -19,7 +19,7 @@ const MoviePage = () => {
         voteASC: '평점(올림차순)'
     };
 
-    const [query, setQuery] = useSearchParams();
+    const [query] = useSearchParams();
     const [page, setPage] = useState(1);
     const [title, setTitle] = useState(sortType.popDesc);
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 991);
