@@ -13,14 +13,20 @@ import Button from "react-bootstrap/Button";
 
 const MoviePage = () => {
 
+    const sortType = {
+        popDesc: '인기도(내림차순)',
+        popAsc: '인기도(올림차순)',
+        voteDesc: '평점(내림차순)',
+        voteASC: '평점(올림차순)'
+    }
 
     const [query, setQuery] = useSearchParams();
     const [page, setPage] = useState(1);
-    const [title, setTitle] = useState('인기도(내림차순)');
+    const [title, setTitle] = useState(sortType.popDesc);
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 991);
     const [genreTitle, setGenreTitle] = useState('전체');
     const [modData, setModData] = useState([]);
-    const [selectedID, setSelectedID] = useState(null);
+    const [selectedID, setSelectedID] = useState(0);
 
     const keyword = query.get('q')
 
@@ -35,41 +41,58 @@ const MoviePage = () => {
 
     useEffect(()=>{
         setPage(1)
-        setTitle('인기도(내림차순)')
+        setTitle(sortType.popDesc)
         setGenreTitle('전체')
-        setSelectedID(null)
+        setSelectedID(0)
     },[keyword])
-
-    useEffect(() => {
-        setTitle('인기도(내림차순)')
-        setGenreTitle('전체')
-        setSelectedID(null)
-    }, [page]);
 
     const handlePageClick=({selected})=>{
         setPage(selected+1)
     }
 
     const handleSelect = (e) => {
-        switch (e){
-            case '1':
-                setTitle('인기도(내림차순)');
-                setModData([...data?.results].sort((a,b)=>b.popularity - a.popularity));
-                break;
-            case '2':
-                setTitle('인기도(올림차순)');
-                setModData([...data?.results].sort((a,b)=>a.popularity - b.popularity));
-                break;
-            case '3':
-                setTitle('평점(내림차순)');
-                setModData([...data?.results].sort((a,b)=>b.vote_average - a.vote_average));
-                break;
-            case '4':
-                setTitle('평점(올림차순)');
-                setModData([...data?.results].sort((a,b)=>a.vote_average - b.vote_average));
-                break;
-            default:
-                setTitle('정렬')
+        if(selectedID!==0){
+            switch (e) {
+                case 'popDesc':
+                    setTitle(sortType.popDesc);
+                    modData.sort((a, b) => b.popularity - a.popularity);
+                    break;
+                case 'popAsc':
+                    setTitle(sortType.popAsc);
+                    modData.sort((a, b) => a.popularity - b.popularity);
+                    break;
+                case 'voteDesc':
+                    setTitle(sortType.voteDesc);
+                    modData.sort((a, b) => b.vote_average - a.vote_average);
+                    break;
+                case 'voteASC':
+                    setTitle(sortType.voteASC);
+                    modData.sort((a, b) => a.vote_average - b.vote_average);
+                    break;
+                default:
+                    setTitle('정렬')
+            }
+        }else {
+            switch (e) {
+                case 'popDesc':
+                    setTitle(sortType.popDesc);
+                    setModData([...data?.results].sort((a, b) => b.popularity - a.popularity));
+                    break;
+                case 'popAsc':
+                    setTitle(sortType.popAsc);
+                    setModData([...data?.results].sort((a, b) => a.popularity - b.popularity));
+                    break;
+                case 'voteDesc':
+                    setTitle(sortType.voteDesc);
+                    setModData([...data?.results].sort((a, b) => b.vote_average - a.vote_average));
+                    break;
+                case 'voteASC':
+                    setTitle(sortType.voteASC);
+                    setModData([...data?.results].sort((a, b) => a.vote_average - b.vote_average));
+                    break;
+                default:
+                    setTitle('정렬')
+            }
         }
     }
 
@@ -96,10 +119,6 @@ const MoviePage = () => {
         const filtered = data?.results.filter(movie=>movie.genre_ids.includes(parseInt(selectedGenre)))
         setModData(filtered)
     }
-
-    useEffect(() => {
-
-    }, [modData]);
 
     useEffect(()=>{
         const handleResize = () => {
@@ -168,10 +187,10 @@ const MoviePage = () => {
                             title={`${title}`}
                             onSelect={handleSelect}
                         >
-                            <Dropdown.Item eventKey="1">인기도(내림차순)</Dropdown.Item>
-                            <Dropdown.Item eventKey="2">인기도(올림차순)</Dropdown.Item>
-                            <Dropdown.Item eventKey="3">평점(내림차순)</Dropdown.Item>
-                            <Dropdown.Item eventKey="4">평점(올림차순)</Dropdown.Item>
+                            <Dropdown.Item eventKey="popDesc">{sortType.popDesc}</Dropdown.Item>
+                            <Dropdown.Item eventKey="popAsc">{sortType.popAsc}</Dropdown.Item>
+                            <Dropdown.Item eventKey="voteDesc">{sortType.voteDesc}</Dropdown.Item>
+                            <Dropdown.Item eventKey="voteASC">{sortType.voteASC}</Dropdown.Item>
                         </DropdownButton>
                     </div>
                 </Col>

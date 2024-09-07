@@ -26,11 +26,12 @@
 }
 
 .overlay > h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 4px;
+    display: none;
 }
 
 .overlay > div{
